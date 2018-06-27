@@ -12,15 +12,42 @@
 
         <!-- Styles -->
         <style>
-            html, body {
-                background-color: #fff;
-                color: #636b6f;
+            .untappd-link{
+                border: 2px solid white;
+                padding: 10px;
+                border-radius: 5px;
+            }
+
+
+            .untappd-link:hover{
+                border: 2px solid white;
+                padding: 10px;
+                border-radius: 5px;
+                background-color: whitesmoke;
+                color: black;
+                transition: 200ms;
+            }
+
+
+            html{
+                background-color: transparent;
+                background-image: url({{asset('/img/background.jpg')}});
+                background-size: cover;
+                background-position-x: center;
+                background-position-y: center;
                 font-family: 'Raleway', sans-serif;
                 font-weight: 100;
                 height: 100vh;
                 margin: 0;
             }
 
+            body{
+                background-color: rgba(0, 0, 0, .5);
+                font-family: 'Raleway', sans-serif;
+                font-weight: 100;
+                height: 100vh;
+                margin: 0;
+            }
             .full-height {
                 height: 100vh;
             }
@@ -39,6 +66,7 @@
                 position: absolute;
                 right: 10px;
                 top: 18px;
+                display: flex;
             }
 
             .content {
@@ -47,16 +75,18 @@
 
             .title {
                 font-size: 84px;
+                color: whitesmoke;
             }
 
             .links > a {
-                color: #636b6f;
+                color: whitesmoke;
                 padding: 0 25px;
                 font-size: 12px;
                 font-weight: 600;
                 letter-spacing: .1rem;
                 text-decoration: none;
                 text-transform: uppercase;
+
             }
 
             .m-b-md {
@@ -71,23 +101,15 @@
                     @auth
                         <a href="{{ url('/home') }}">Home</a>
                     @else
-                        <a href="{{ route('login') }}">Login</a>
-                        <a href="{{ route('register') }}">Register</a>
+                        <a href="{{ route('login') }}"><div class="untappd-link">Entrar</div></a>
+                        <a href="{{ route('register') }}"><div class="untappd-link" >Criar Conta</div></a>
                     @endauth
                 </div>
             @endif
 
             <div class="content">
                 <div class="title m-b-md">
-                    Laravel
-                </div>
-
-                <div class="links">
-                    <a href="https://laravel.com/docs">Documentation</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
+                    Untappd-clone
                 </div>
             </div>
         </div>
