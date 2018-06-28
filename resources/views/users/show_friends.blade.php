@@ -86,45 +86,48 @@
                     </div>
                 </div>
             </div>
- <div class="col-md-4">
-            <div class="card">
-                <div class="card-header">Solicitações de amizade</div>
-                <div class="card-body">
-                <?php $cont = 0; ?>
-                    @foreach ($requests as $user)
-        
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="row px-3 mb-3">
-                                <div class="col-md-3 p-0 ">
-                                    <img class="rounded-circle img-fluid" src="{{asset('/img/default_avatar.jpg')}}">
-                                </div>
-                                <div class="col-md-9 p-0">
-                                    <div class="col-md-12 side-user-name"><a href="{{route('users.show', $user->id)}}">{{$user->first_name.' '.$user->last_name}}</a></div>
-                                    <div class="col-md-12 small-grey"><i class="fas fa-user"></i> {{$user->username}}</div>
-                                    <div class="col-md-12 small-grey"><i class="fas fa-map-marker-alt"></i> {{$user->location}}</div>
-                                    <form method="POST" action="{{route('users.accept_friend_request')}}">
-                                        @csrf
-                                            <input type="hidden" name="has_friend_id" value="{{$ids[$cont]}}">
-                                            <div class="col-md-12"><button class="btn btn-secondary" type="submit">Aceitar</button></div>
-                                        </form>
-                                    <form method="POST" action="{{route('users.decline_friend_request')}}">
-                                        @csrf
-                                            <input type="hidden" name="has_friend_id" value="{{$ids[$cont]}}">
-                                            <p><div class="col-md-12"><button class="btn btn-secondary" type="submit">Recusar</button></div>
-                                        </form>
-                                </div>
-                            </div>
+            @if (Auth::user()->id == $id)
+                
+            <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-header">Solicitações de amizade</div>
+                            <div class="card-body">
+                            <?php $cont = 0; ?>
+                                @foreach ($requests as $user)
+                    
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="row px-3 mb-3">
+                                            <div class="col-md-3 p-0 ">
+                                                <img class="rounded-circle img-fluid" src="{{asset('/img/default_avatar.jpg')}}">
+                                            </div>
+                                            <div class="col-md-9 p-0">
+                                                <div class="col-md-12 side-user-name"><a href="{{route('users.show', $user->id)}}">{{$user->first_name.' '.$user->last_name}}</a></div>
+                                                <div class="col-md-12 small-grey"><i class="fas fa-user"></i> {{$user->username}}</div>
+                                                <div class="col-md-12 small-grey"><i class="fas fa-map-marker-alt"></i> {{$user->location}}</div>
+                                                <form method="POST" action="{{route('users.accept_friend_request')}}">
+                                                    @csrf
+                                                        <input type="hidden" name="has_friend_id" value="{{$ids[$cont]}}">
+                                                        <div class="col-md-12"><button class="btn btn-secondary" type="submit">Aceitar</button></div>
+                                                    </form>
+                                                <form method="POST" action="{{route('users.decline_friend_request')}}">
+                                                    @csrf
+                                                        <input type="hidden" name="has_friend_id" value="{{$ids[$cont]}}">
+                                                        <p><div class="col-md-12"><button class="btn btn-secondary" type="submit">Recusar</button></div>
+                                                    </form>
+                                            </div>
+                                        </div>
+                                        </div>
+                                    </div>
+                                <br>
+                            <?php $cont++; ?>
+                                
+                    @endforeach
                             </div>
                         </div>
-                    <br>
-                <?php $cont++; ?>
-                    
-        @endforeach
+                    </div>
                 </div>
-            </div>
-        </div>
-    </div>
+            @endif
 
 
 </div>

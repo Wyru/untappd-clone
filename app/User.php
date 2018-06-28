@@ -29,9 +29,20 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    public function count_friends(){
+        $query = HasFriend::where(
+            'user_sender',$this->id
+        )->orWhere(
+            'user_receiver',$this->id
+        )->where('status', '=', true)
+        ->count();
+
+
+        return $query;
+
+    }
+
     public function is_friend($id){
-        
-        
 
         $query = HasFriend::where([
             ['user_sender',$this->id],
