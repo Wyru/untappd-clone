@@ -185,7 +185,7 @@ class UserController extends Controller
             array_push($requests, User::where('id', '=', $user)->first());;
         }
         
-        return view('/users/show_friends', compact(['users'], ['requests'], ['ids']));
+        return view('/users/show_friends', compact(['users'], ['requests'], ['ids'], ['id']));
     }
 
     public function decline_friend_request(Request $request){

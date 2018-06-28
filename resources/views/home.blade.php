@@ -87,7 +87,7 @@
                                     Insignias 
                                 </div></a>
                                 <a class="side-user-status-link" href="{{route('users.friends', Auth::user()->id)}}"><div class="side-user-info-grey">
-                                    <span class="num">0</span><br>
+                                    <span class="num">{{Auth::user()->count_friends()}}</span><br>
                                     Amigos
                                 </div></a>
                             </div>

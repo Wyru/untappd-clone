@@ -61,7 +61,7 @@
                         <a href="" class="status"><span class="num">0</span> total</a>
                         <a href="" class="status"><span class="num">0</span> únicas</a>
                         <a href="" class="status"><span class="num">0</span> insígnias</a>
-                        <a href="" class="status"><span class="num">0</span> amigos</a>
+                        <a href="{{route('users.friends', $user->id)}}" class="status"><span class="num">{{$user->count_friends()}}</span> amigos</a>
                     </div>
                     
                 </div>
