@@ -54,7 +54,7 @@ class UserController extends Controller
     {
         $user = User::find($id);
 
-        $checkIns = $user->checkIns()->paginate(10);
+        $checkIns = $user->checkIns()->orderBy('created_at', 'DESC')->paginate(10);
 
         return view('users.show', compact('user', 'checkIns'));
     }
@@ -123,7 +123,14 @@ class UserController extends Controller
         $users = [];
         
         if(isset($input['query'])){
-            $users = User::where('first_name', 'like', '%'.$input['query'].'%')->orWhere('last_name', 'like', '%'.$input['query'].'%')->get();
+            $text = strtolower($input['query']);
+            $users = User::whereRaw('LOWER(first_name) like "%'.$text.'%"')
+                        ->orWhereRaw('LOWER(last_name) like "%'.$text.'%"')
+                        ->orWhereRaw('LOWER(username) like "%'.$text.'%"')
+                        ->get();
+        }
+        else{
+            $users = User::all();
         }
         
         // dd($users);

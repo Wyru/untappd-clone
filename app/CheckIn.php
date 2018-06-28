@@ -29,4 +29,8 @@ class CheckIn extends Model
     public function brewery(){
         return $this->beer->brewery();
     }
+
+    public function badges(){
+        return $this->hasMany(\App\HasBadge::class);
+    }
 }
