@@ -11,6 +11,7 @@ use App\User;
 use App\Brewery;
 use App\HasBadge;
 use Carbon\Carbon;
+use App\Comment;
 
 class CheckInController extends Controller
 {
@@ -29,6 +30,20 @@ class CheckInController extends Controller
         return view('/check_ins/create', compact(['beers']));
 
     }
+    
+    public function create_comment(Request $request){
+        $check = Comment::create([
+            'user_id' => $request->user_id,
+            'check_in_id' => $request->check_in_id,
+            'description' => $request->description
+        ]);
+
+            //dd($check);
+
+        return redirect()->back();
+
+    }
+
     
     public function store(Request $request)
     {
@@ -140,6 +155,9 @@ class CheckInController extends Controller
         return view('/');
 
     }
+
+
+    
     
 
 }

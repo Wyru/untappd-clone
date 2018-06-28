@@ -15,7 +15,7 @@ use App\User;
 
 Route::get('/', function () {
     if(Auth::user()!= null)
-        return redirect()->route('home');
+    return redirect()->route('home');
     return view('welcome');
 });
 
@@ -34,6 +34,7 @@ Route::post('/breweries/{id}/', 'BreweryController@update')->name('breweries.upd
 Route::get('/breweries/{id}/beers', 'BreweryController@beers')->name('breweries.beers');
 
 
+
 Route::resource('beers', 'BeerController');
 
 Route::resource('users', 'UserController',  ['except' => ['update']]);
@@ -45,6 +46,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 //Check in
 Route::get('/check_in/create', 'CheckInController@create')->name('check_in.create');
 Route::post('/check_in/store', 'CheckInController@store')->name('check_in.store');
+Route::post('/check_in/comments', 'CheckInController@create_comment')->name('check_in.comment');
 Route::get('/check_in/show/{id}', 'CheckInController@show')->name('check_in.show');
 
 
