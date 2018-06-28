@@ -43,7 +43,7 @@ class CheckInController extends Controller
         ]);
         
         if($request->file('photo')){
-            $file_path = 'beer/photo'; 
+            $file_path = 'checkin/photo'; 
             $check_in->photo = $check_in->uploadFile($request->file('photo'), $file_path); 
             $check_in->save();
         }

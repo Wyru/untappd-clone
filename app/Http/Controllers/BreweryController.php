@@ -58,7 +58,10 @@ class BreweryController extends Controller
     public function show($id)
     {
         $brewery = Brewery::find($id);
-        return view('breweries.show',compact('brewery'));
+        $checkIns = $brewery->checkIns()
+            ->orderBy('check_ins.created_at', 'DESC')
+            ->paginate(15);
+        return view('breweries.show',compact('brewery', 'checkIns'));
     }
 
     /**

@@ -15,7 +15,7 @@ use App\User;
 
 Route::get('/', function () {
     if(Auth::user()!= null)
-        return redirect()->route('feed', Auth::user()->id);
+        return redirect()->route('home');
     return view('welcome');
 });
 
@@ -40,16 +40,11 @@ Route::post('/users/{id}/', 'UserController@update')->name('users.update');
 
 Route::post('/users/{id}/update-password', 'UserController@updatePassword')->name('users.update.pass');
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/feed/{id}', 'CheckInController@showAllHome')->name('feed');
 
 //Check in
 Route::get('/check_in/create', 'CheckInController@create')->name('check_in.create');
 Route::post('/check_in/store', 'CheckInController@store')->name('check_in.store');
 Route::get('/check_in/show/{id}', 'CheckInController@show')->name('check_in.show');
-
-
-
-//Friend requests:
 
 
 Route::get('img/{folder?}/{filename?}', ['as' => 'file', 'uses' => function($folder, $filename) {

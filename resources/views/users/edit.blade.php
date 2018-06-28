@@ -54,7 +54,7 @@
                     </div>
                     
 
-                    <form action="{{route('users.update', Auth::user()->id)}}" method="POST" class="mb-5">
+                    <form action="{{route('users.update', Auth::user()->id)}}" enctype="multipart/form-data" method="POST" class="mb-5">
                         @csrf
                         <div class="form-group row align-items-center">
                     
@@ -69,6 +69,25 @@
                                 @if ($errors->has('username'))
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('username') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+
+                        </div>
+
+                        <div class="form-group row align-items-center">
+                    
+                            <div class="offset-2 col-md-2">
+                                <label class="align-middle" >Nome de Usuário</label>
+                            </div>
+                            
+
+                            <div class="col-md-6">
+                                <input value="{{$user->username}}" placeholder="" id="photo" type="file" class="form-control{{ $errors->has('photo') ? ' is-invalid' : '' }}" name="photo" required>
+
+                                @if ($errors->has('photo'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('photo') }}</strong>
                                     </span>
                                 @endif
                             </div>

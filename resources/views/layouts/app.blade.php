@@ -79,7 +79,7 @@
 
                             <li class="nav-item dropdown" style="margin-right: 20px;">
                                 <a id="navbarDropdown" style="padding:0;" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                <img src="{{asset('/img/default_avatar.jpg')}}" class="rounded-circle" style="height: 40px;">
+                                <img src="{{Auth::user()->get_photo()}}" class="rounded-circle" style="height: 40px;">
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu" aria-labelledby="navbarDropdown">

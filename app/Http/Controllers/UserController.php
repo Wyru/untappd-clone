@@ -54,7 +54,9 @@ class UserController extends Controller
     {
         $user = User::find($id);
 
-        return view('users.show', compact('user'));
+        $checkIns = $user->checkIns()->paginate(10);
+
+        return view('users.show', compact('user', 'checkIns'));
     }
 
     /**
@@ -82,8 +84,11 @@ class UserController extends Controller
 
 
         $user->fill($request->all());
+        if($request->file('photo')){
+            $file_path = 'user/photo'; 
+            $user->photo = $user->uploadFile($request->file('photo'), $file_path); 
+        }
         $user->save();
-
 
         return redirect()->route('users.show',$user->id);
     }
@@ -124,7 +129,7 @@ class UserController extends Controller
         // dd($users);
         //$users = User::all();
     
-    return view('users.search_friends', compact(['users']));
+        return view('users.search_friends', compact(['users']));
     }
 
 
@@ -148,7 +153,9 @@ class UserController extends Controller
     public function list_friends($id){
 
 
-        $friends = HasFriend::where('user_sender', '=', $id)->orWhere('user_receiver', '=', $id)->get();
+        $friends = HasFriend::where('user_sender', '=', $id)
+                        ->orWhere('user_receiver', '=', $id)
+                        ->get();
 
         // dd($friends);
 

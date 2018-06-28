@@ -46,7 +46,7 @@
     <div class="row user-cover mb-3">
         <div  class="row align-items-end black-cloak col-12">
             <div class="col-md-2"  style="padding-bottom:20px;padding-left:10px;">
-                <img class="rounded-circle img-fluid" style="width:100px;" src="{{asset('/img/default_avatar.jpg')}}">
+                <img class="rounded-circle img-fluid" style="width:100px;" src="{{$user->get_photo()}}">
             </div>
             <div class="col-md-8 user-info" style="padding-bottom:20px; margin-left: -50px;">
                 <div class="row mb-2">
@@ -73,16 +73,73 @@
 
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Atividade Recente dos Amigos</div>
+                <div class="card-header">Meus check-ins</div>
 
                 <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
+                    @foreach ($checkIns as $checkIn)
+                    <div class="check_in">
+                        <div class="row">
+                            <div class="col-md-1">
+                                <img class="img-fluid rounded-circle" src="{{Auth::user()->get_photo()}}">
+                            </div>
 
-                    You are logged in!
+                            <div class="col-md-10" style="font-size:20px;">
+                                <div class="col-md-12" ><a class="untappd-link" href="{{route('users.show',$checkIn->user->id)}}">{{$checkIn->user->first_name}}</a> está tomando 
+                                    uma <a class="untappd-link" href="{{route('beers.show',$checkIn->beer->id)}}">{{$checkIn->beer->name}}</a> por <a class="untappd-link" href="{{route('breweries.show',$checkIn->brewery->id)}}">{{$checkIn->brewery->name}} </a></div>
+                                <div class="col-md-12 ">
+                                        <?php $stars = 0 ?>
+                                        @while ($stars < $checkIn->grade)
+                                            <span class="fa fa-star" style="color: orange;" ></span>
+                                            <?php $stars++ ?>
+                                        @endwhile                              
+            
+                                        @while ($stars < 5)
+                                            <span class="fa fa-star"></span> 
+                                            <?php $stars++ ?>
+                                        @endwhile  
+                                </div>
+                                @if($checkIn->photo)
+                                    <div class="col-md-12 mt-3 mb-3">
+                                        <div class="row jutify-content-center">
+                                            <div class="col"></div>
+                                            <img style="height:400px;" class="" src="{{route('file',$checkIn->photo)}}">
+                                            <div class="col"></div>
+                                        </div>
+                                    </div>
+                                @endif
+                                
+                            </div>
+
+                            <div class="col-md-1">
+                                <img class="img-fluid " src="{{route('file',$checkIn->beer->photo)}}">
+                            </div>
+                        </div>
+
+                        <div class="row justify-content-center">
+                            <div class="col-md-10">
+                                <div class="card">
+                                    <div class="card-header">Comentarios</div>
+                                    <div class="card-body">
+                                    {{-- Comentarios vao ficar aqui =P --}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row justify-content-end mt-2">
+                            <div class="col-md-4">
+                                    {{\Carbon\Carbon::parse($checkIn->created_at)->format('d/m/Y')}}
+                                    as 
+                                    {{\Carbon\Carbon::parse($checkIn->created_at)->format('h:i:s')}}
+                            </div>
+                        </div>
+                    </div>
+                    
+                    @endforeach
+                    <div class="row justify-content-end mt-4">
+                        <div class="col-md-3">
+                                {{ $checkIns->links() }}
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

@@ -64,7 +64,7 @@
                     <div class="card-body">
                         <div class="row px-3 mb-3">
                             <div class="col-md-3 p-0 ">
-                                <img class="rounded-circle img-fluid" src="{{asset('/img/default_avatar.jpg')}}">
+                                <img class="rounded-circle img-fluid" src="{{Auth::user()->get_photo()}}">
                             </div>
                             <div class="col-md-9 p-0">
                                 <div class="col-md-12 side-user-name">{{Auth::user()->first_name.' '.Auth::user()->last_name}}</div>

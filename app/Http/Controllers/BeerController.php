@@ -78,8 +78,8 @@ class BeerController extends Controller
     public function show($id)
     {
         $beer  = Beer::find($id);
-
-        return view('beers.show', compact('beer'));
+        $checkIns = $beer->checkIns()->orderBy('created_at', 'DESC')->paginate(15);
+        return view('beers.show', compact('beer', 'checkIns'));
     }
 
     /**
