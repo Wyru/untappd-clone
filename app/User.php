@@ -52,9 +52,9 @@ class User extends Authenticatable
     public function count_unique(){
         
         $query = CheckIn::where('user_id', '=', $this->id)
-        ->groupBy('beer_id')
-        ->count();
-        return $query;
+        ->selectRaw('count(DISTINCT beer_id)')->get();
+
+        return $query[0]->count;
         
     }
     
