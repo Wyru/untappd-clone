@@ -44,7 +44,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Trabalho final</div>
+                <div class="card-header">Atividade Recente dos Amigos</div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -52,9 +52,45 @@
                             {{ session('status') }}
                         </div>
                     @endif
-                    Rogério da Silva Soares Júnior<br>
-                    Willian Saymon da Silva
 
+                @foreach ($query as $q)
+                        
+                    <div class="row justify-content-center">
+                            <div class="col-md-12">
+                                <div class="card">
+                                    <div class="card-header">Check-in</div>
+                                    <div class="card-body">
+                                        <div class="row">
+
+                                            <div class=" col-md-8">
+                                                <div class="side-user-name">
+                                                <img style="width:100px; height:100px;" src="{{$q->logo}}" alt="Logo da cervejaria">
+                                                <a href="{{route('users.show', $q->user_id)}}">{{$q->first_name}}</a>
+                                                tomou <a href="#">{{$q->beer_name}}</a> em <a href="#"> {{$q->brewery_name}}</a>
+                                                <?php $stars = 0 ?>
+                                                <br>Nota:
+                                                @while ($stars < $q->grade)
+                                                    <span class="fa fa-star" style="color: orange;" ></span>
+                                                    <?php $stars++ ?>
+                                                @endwhile                              
+
+                                                @while ($stars < 5)
+                                                    <span class="fa fa-star"></span> 
+                                                    <?php $stars++ ?>
+                                                @endwhile                              
+                                            </div>
+                                            <div class="offset-2 col-md-8">
+                                            
+                                                <img class="h-50" src="{{$q->photo}}" alt="Foto da cerveja">
+                                            </div>
+                                        </div>                    
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                    @endforeach
+                
                 </div>
             </div>
         </div>

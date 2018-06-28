@@ -56,7 +56,6 @@
 
                     <form action="{{route('check_in.store')}}" method="POST" class="mb-5">
                         @csrf
-
                         <input type="hidden" name="user_id" value="{{Auth::user()->id}}">
                         <div class="form-group row align-items-center">
                     
@@ -66,7 +65,6 @@
                             
                         </div>                        
                             <div class="row">
-
                                 <div class="offset-2 col-md-2">
                                     <select name="beer_id">
                                         @foreach ($beers as $beer)
