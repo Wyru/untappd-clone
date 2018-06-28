@@ -15,8 +15,8 @@ class HasFriend extends Migration
     {
         Schema::create('has_friend', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_sender');
-            $table->integer('user_receiver');
+            $table->unsignedInteger('user_sender');
+            $table->unsignedInteger('user_receiver');
             $table->boolean('status')->nullable();
             $table->timestamps();
 

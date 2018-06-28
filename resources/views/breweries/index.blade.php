@@ -23,10 +23,10 @@
                 <div class="card-body">
                     @foreach ($breweries as $brewery)
                     <div class="row brewery styled-border-bottom p-3">
-                        <div class="col-md-1">
-                            <img src="{{route('file', $brewery->logo)}}">
+                        <div class="col-md-2">
+                            <img class="img-img-fluid" src="{{route('file', $brewery->logo)}}">
                         </div>
-                        <div class="col-md-7">
+                        <div class="col-md-6">
                             <div style="font-size:20px; font-weight: bolder;"><a href="{{route('breweries.show',$brewery->id)}}">{{$brewery->name}}</a></div>
                             <div>{{$brewery->country}}</div>
                         </div>

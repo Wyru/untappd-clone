@@ -23,6 +23,10 @@ Auth::routes();
 
 Route::resource('breweries', 'BreweryController',  ['except' => ['update']]);
 Route::post('/breweries/{id}/', 'BreweryController@update')->name('breweries.update');
+Route::get('/breweries/{id}/beers', 'BreweryController@beers')->name('breweries.beers');
+
+
+Route::resource('beers', 'BeerController');
 
 Route::resource('users', 'UserController',  ['except' => ['update']]);
 Route::post('/users/{id}/', 'UserController@update')->name('users.update');
@@ -42,6 +46,7 @@ Route::post('/users/send/friend_request', 'UserController@friend_request')->name
 Route::post('/users/accept_friend_request', 'UserController@accept_friend_request')->name('users.accept_friend_request');
 Route::post('/users/decline_friend_request', 'UserController@decline_friend_request')->name('users.decline_friend_request');
 
-Route::get('/{folder?}/{filename?}', ['as' => 'file', 'uses' => function($folder, $filename) {
+
+Route::get('img/{folder?}/{filename?}', ['as' => 'file', 'uses' => function($folder, $filename) {
     return response()->file( storage_path() . '/app/' . $folder. '/' . $filename);  
 }]);

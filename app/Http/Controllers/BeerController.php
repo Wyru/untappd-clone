@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Beer;
 use App\Brewery;
-use App\Http\Requests\CreateBreweryRequest;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Http\Requests\CreateBeerRequest;
 
-class BreweryController extends Controller
+class BeerController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +17,7 @@ class BreweryController extends Controller
      */
     public function index()
     {
-        $breweries = Brewery::all();
-        return view('breweries.index', compact('breweries'));
+        //
     }
 
     /**
@@ -26,7 +27,8 @@ class BreweryController extends Controller
      */
     public function create()
     {
-        return view('breweries.create');
+        $breweries = Brewery::all();
+        return view('beers.create', compact('breweries'));
     }
 
     /**
@@ -35,18 +37,36 @@ class BreweryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CreateBreweryRequest $request)
+    public function store(CreateBeerRequest $request)
     {
         $input = $request->all();
-        $input['logo'] = '';
-        $brewery = Brewery::create($input);
+        DB::beginTransaction();
 
-        $file_path = 'breweries/logo'; 
-        $brewery->logo = $brewery->uploadFile($request->file('logo'), $file_path); 
+        if($input['brewery_id'] === 'new'){
+            $request->validate([
+                'brewery_name' => 'required|string|unique:brewery,name',
+                'brewery_logo' => 'required|image',
+                'brewery_location' => 'required|string',
+            ]);
 
-        $brewery->save();
+            $brewery = Brewery::create([
+                'name' => $input['brewery_name'],
+                'logo' => $input['brewery_logo'],
+                'location' => $input['brewery_location'],
+                'type' => $input['brewery_type'],
+                'country' => $input['country_location'],
+            ]);
+            
+        }
+        $input['photo'] = '';
+        $beer = Beer::create($input);
 
-        return redirect()->route('breweries.index');
+        $file_path = 'beer/photo'; 
+        $beer->photo = $beer->uploadFile($request->file('photo'), $file_path); 
+
+        $beer->save();
+        DB::commit();
+        return redirect()->route('home');
     }
 
     /**
@@ -57,8 +77,9 @@ class BreweryController extends Controller
      */
     public function show($id)
     {
-        $brewery = Brewery::find($id);
-        return view('breweries.show',compact('brewery'));
+        $beer  = Beer::find($id);
+
+        return view('beers.show', compact('beer'));
     }
 
     /**
@@ -93,10 +114,5 @@ class BreweryController extends Controller
     public function destroy($id)
     {
         //
-    }
-
-    public function beers($id){
-        $brewery = Brewery::find($id);
-        return view('breweries.beers',compact('brewery'));
     }
 }

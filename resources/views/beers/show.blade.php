@@ -21,16 +21,15 @@
                     
                     <div class="row brewery styled-border-bottom p-3">
                         <div class="col-md-2">
-                            <img src="{{route('file', $brewery->logo)}}">
+                            <img src="{{route('file', $beer->photo)}}">
                         </div>
                         <div class="col-md-8">
-                            <div style="font-size:30px; font-weight: bolder;">{{$brewery->name}}</div>
-                            <div>{{$brewery->location}}, {{$brewery->country}}</div>
-                            <div>{{$brewery->type}}</div>
+                            <div style="font-size:30px; font-weight: bolder;">{{$beer->name}}</div>
+                            <div><a style="font-size:20px;" href="{{route('breweries.show', $beer->brewery_id)}}">{{$beer->brewery->name}}</a></div>
+                            <div>{{$beer->type}}</div>
 
                         </div>
                         <div class="col-md-2">
-                            
                             <div class="row justify-content-start">
                                 <div class="col-6  col-4 styled-border-bottom p-2" >TOTAL <BR>57 </div>
                                 <div class="col-6 styled-border-left col-4 styled-border-bottom p-2" >UNICAS <BR>4,9885 </div>
@@ -39,10 +38,11 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row d-flex justify-content-around">
-                        <div class="col-md-4 text-center styled-border-bottom p-2" >Nota: 5 </div>
-                        <div class="col-md-4 text-center styled-border-left styled-border-bottom p-2" >57 avaliações</div>
-                        <div class="col-md-4 text-center styled-border-left styled-border-bottom p-2" >57 cervejas </div>
+                    <div class="row d-flex justify-content-around mb-4">
+                        <div class="col text-center styled-border-bottom p-2" >{{$beer->alcoholic_content}}% teor alcoólico </div>
+                        <div class="col text-center styled-border-left styled-border-bottom p-2" >57</div>
+                        <div class="col text-center styled-border-left styled-border-bottom p-2" >adicionada {{\Carbon\Carbon::parse($beer->created_at)->format('d/m/Y')}} </div>
+
                     </div>
                 </div>
                 
@@ -65,18 +65,14 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="offset-1 col-md-10 menu-edit-title">
-                            Cervejas
+                            Quem tomou
                         </div>
                     </div>
                     <div class="row justify-content-around">
-                        @foreach ($brewery->beers()->limit(6)->get() as $beer)
-                            <div class="col-md-4">
-                                <img class="img-fluid" src="{{route('file', $beer->photo)}}">
-                            </div>
-                        @endforeach
+                        aa
                     </div>
                     <div class="row justify-content-end">
-                    <div class="col-md-4"><a href="{{route('breweries.beers', $brewery->id)}}">ver todas...</a></div>
+                    <div class="col-md-4"><a href="{{route('breweries.beers', $beer->id)}}">ver todos...</a></div>
                     </div>
                 </div>
                 
