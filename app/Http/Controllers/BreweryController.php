@@ -58,7 +58,6 @@ class BreweryController extends Controller
     public function show($id)
     {
         $brewery = Brewery::find($id);
-
         return view('breweries.show',compact('brewery'));
     }
 
@@ -94,5 +93,10 @@ class BreweryController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function beers($id){
+        $brewery = Brewery::find($id);
+        return view('breweries.beers',compact('brewery'));
     }
 }

@@ -49,18 +49,9 @@
             </div>
         </div>   
     </div>
-
+        
     <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-body">
-                    
-                    
-                </div>
-                
-            </div>
-        </div>  
-        <div class="col-md-4">
+        <div class="col-md-12">
             <div class="card">
                 <div class="card-body">
                     <div class="row">
@@ -68,20 +59,29 @@
                             Cervejas
                         </div>
                     </div>
-                    <div class="row justify-content-around">
-                        @foreach ($brewery->beers()->limit(6)->get() as $beer)
-                            <div class="col-md-4">
-                                <img class="img-fluid" src="{{route('file', $beer->photo)}}">
-                            </div>
-                        @endforeach
+                    @foreach ($brewery->beers as $beer)
+                    <div class="row brewery styled-border-bottom p-3">
+                        <div class="col-md-2">
+                            <img class="img-img-fluid" src="{{route('file', $beer->photo)}}">
+                        </div>
+                        <div class="col-md-6">
+                            <div style="font-size:20px; font-weight: bolder;"><a href="{{route('beers.show',$beer->id)}}">{{$beer->name}}</a></div>
+                            <div>{{$beer->country}}</div>
+                        </div>
+                        
                     </div>
-                    <div class="row justify-content-end">
-                    <div class="col-md-4"><a href="{{route('breweries.beers', $brewery->id)}}">ver todas...</a></div>
+                    <div class="row d-flex justify-content-around mb-4">
+                        <div class="col text-center styled-border-bottom p-2" >{{$beer->alcoholic_content}}% teor alcoólico </div>
+                        <div class="col text-center styled-border-left styled-border-bottom p-2" >57</div>
+                        <div class="col text-center styled-border-left styled-border-bottom p-2" >4646 avaliações </div>
+                        <div class="col text-center styled-border-left styled-border-bottom p-2" >adicionada {{\Carbon\Carbon::parse($beer->created_at)->format('d/m/Y')}} </div>
+
                     </div>
+                    @endforeach
                 </div>
-                
             </div>
-        </div>  
+        </div>
+        
     </div>
 </div>
 @endsection

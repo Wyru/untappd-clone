@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Http\Requests\CreateBeerRequest;
 use App\Beer;
 use App\Brewery;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Http\Requests\CreateBeerRequest;
 
 class BeerController extends Controller
 {
@@ -39,6 +40,24 @@ class BeerController extends Controller
     public function store(CreateBeerRequest $request)
     {
         $input = $request->all();
+        DB::beginTransaction();
+
+        if($input['brewery_id'] === 'new'){
+            $request->validate([
+                'brewery_name' => 'required|string|unique:brewery,name',
+                'brewery_logo' => 'required|image',
+                'brewery_location' => 'required|string',
+            ]);
+
+            $brewery = Brewery::create([
+                'name' => $input['brewery_name'],
+                'logo' => $input['brewery_logo'],
+                'location' => $input['brewery_location'],
+                'type' => $input['brewery_type'],
+                'country' => $input['country_location'],
+            ]);
+            
+        }
         $input['photo'] = '';
         $beer = Beer::create($input);
 
@@ -46,7 +65,7 @@ class BeerController extends Controller
         $beer->photo = $beer->uploadFile($request->file('photo'), $file_path); 
 
         $beer->save();
-
+        DB::commit();
         return redirect()->route('home');
     }
 
@@ -58,7 +77,9 @@ class BeerController extends Controller
      */
     public function show($id)
     {
-        //
+        $beer  = Beer::find($id);
+
+        return view('beers.show', compact('beer'));
     }
 
     /**

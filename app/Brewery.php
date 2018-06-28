@@ -13,4 +13,9 @@ class Brewery extends Model
     protected $fillable = [
         'name', 'location', 'logo', 'country', 'type'
     ];
+
+
+    public function beers(){
+        return $this->hasMany(\App\ Beer::class, 'brewery_id', 'id');
+    }
 }

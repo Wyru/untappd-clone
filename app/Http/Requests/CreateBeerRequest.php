@@ -13,7 +13,7 @@ class CreateBeerRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,10 @@ class CreateBeerRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name' => 'required|string|unique:beers,name',
+            'photo' => 'required|image',
+            'alcoholic_content' => 'required|string',
+            'type' => 'required|string',
         ];
     }
 }
