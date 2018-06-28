@@ -24,6 +24,8 @@ Auth::routes();
 Route::resource('breweries', 'BreweryController',  ['except' => ['update']]);
 Route::post('/breweries/{id}/', 'BreweryController@update')->name('breweries.update');
 
+Route::resource('beers', 'BeerController');
+
 Route::resource('users', 'UserController',  ['except' => ['update']]);
 Route::post('/users/{id}/', 'UserController@update')->name('users.update');
 

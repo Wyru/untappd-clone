@@ -118,7 +118,7 @@ class UserController extends Controller
         $users = [];
         
         if(isset($input['query'])){
-            $users = User::where('first_name', 'ilike', '%'.$input['query'].'%')->orWhere('last_name', 'ilike', '%'.$input['query'].'%')->get();
+            $users = User::where('first_name', 'like', '%'.$input['query'].'%')->orWhere('last_name', 'like', '%'.$input['query'].'%')->get();
         }
         
         // dd($users);
