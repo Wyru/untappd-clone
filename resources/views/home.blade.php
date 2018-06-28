@@ -86,7 +86,7 @@
                                     <span class="num">0</span><br>
                                     Insignias 
                                 </div></a>
-                                <a class="side-user-status-link" href="#"><div class="side-user-info-grey">
+                                <a class="side-user-status-link" href="{{route('users.friends', Auth::user()->id)}}"><div class="side-user-info-grey">
                                     <span class="num">0</span><br>
                                     Amigos
                                 </div></a>

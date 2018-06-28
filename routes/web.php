@@ -11,6 +11,8 @@
 |
 */
 
+use App\User;
+
 Route::get('/', function () {
     if(Auth::user()!= null)
         return redirect()->route('home');
@@ -28,6 +30,17 @@ Route::post('/users/{id}/', 'UserController@update')->name('users.update');
 Route::post('/users/{id}/update-password', 'UserController@updatePassword')->name('users.update.pass');
 Route::get('/home', 'HomeController@index')->name('home');
 
+
+
+//Friends
+Route::get('/users/{id}/friends', 'UserController@list_friends')->name('users.friends');
+// Route::get('/users/{id}/friends/search', 'UserController@search_friends')->name('users.search_friends');
+Route::get('/users/search/users', 'UserController@search')->name('users.search');
+
+//Friend requests:
+Route::post('/users/send/friend_request', 'UserController@friend_request')->name('users.friend_request');
+Route::post('/users/accept_friend_request', 'UserController@accept_friend_request')->name('users.accept_friend_request');
+Route::post('/users/decline_friend_request', 'UserController@decline_friend_request')->name('users.decline_friend_request');
 
 Route::get('/{folder?}/{filename?}', ['as' => 'file', 'uses' => function($folder, $filename) {
     return response()->file( storage_path() . '/app/' . $folder. '/' . $filename);  
