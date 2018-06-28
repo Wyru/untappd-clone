@@ -119,10 +119,25 @@
                             <div class="col-md-10">
                                 <div class="card">
                                     <div class="card-header">Comentarios</div>
-                                    <div class="card-body">
-                                    {{-- Comentarios vao ficar aqui =P --}}
+                                        <div class="card">
+                                            <div class="card-body">
+                                                @foreach ($checkIn->comments()->get() as $comment)
+                                                        <?php $user_now = $comment->getUser() ?>
+                                                            <a href="{{route('users.show',$user_now->id)}}"><p>{{$user_now->first_name}} {{$user_now->last_name}}:</a>
+                                                            {{$comment->description}}</p>
+
+                                                @endforeach
+                                            </div>
+                                        </div>
+                                    <form method="POST" action="{{route('check_in.comment')}}">
+                                        @csrf
+                                        <input type="hidden" name="user_id" value="{{Auth::user()->id}}">
+                                        <input type="hidden" name="check_in_id" value="{{$checkIn->id}}">
+                                        <input type="text" name="description">
+                                        <button class="btn btn-secondary" type="submit">Comentar</button>
+                                        
+                                    </form>
                                     </div>
-                                </div>
                             </div>
                         </div>
                         <div class="row justify-content-end mt-2">
