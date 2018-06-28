@@ -18,9 +18,9 @@
             background-color: #f8f8f8;
             color: #333;
             text-align: center;
-            padding: 10px;
             text-transform: uppercase;
             font-size: 10px;
+            padding: 5px;
             font-weight: bolder;
         }
         .side-user-status-link{
@@ -35,7 +35,7 @@
             background-color: #eee;
         }
         .side-user-info-grey > .num{
-            font-size: 20px;
+            font-size: 25px;
         }
     </style>
 @endsection

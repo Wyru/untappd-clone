@@ -21,8 +21,9 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::resource('users', 'UserController');
-
+Route::resource('users', 'UserController',  ['except' => ['update']]);
+Route::post('/users/{id}/', 'UserController@update')->name('users.update');
+Route::post('/users/{id}/update-password', 'UserController@updatePassword')->name('users.update.pass');
 Route::get('/home', 'HomeController@index')->name('home');
 
 //Friends

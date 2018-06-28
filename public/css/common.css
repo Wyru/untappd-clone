@@ -1,0 +1,18 @@
+.button-yellow {
+    color: #fff;
+    background-color: #D8AD00;
+}
+
+.button-yellow:hover {
+    color: #fff;
+    background-color: #f4b800;
+}
+
+.menu-edit-title{
+    border-bottom: 1px solid;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    color: #333;
+    font-weight: bolder;
+    font-size: 20px;
+}

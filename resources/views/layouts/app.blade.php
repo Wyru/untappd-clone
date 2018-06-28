@@ -19,6 +19,8 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/common.css') }}" rel="stylesheet">
+
     <style>
         .search{
             border: 0;
@@ -32,13 +34,17 @@
             padding-right: 32px;
             outline: 0;
         }
+
         .search-icon > span{
             background-color: white;
             border: none;
         }
+
         .dropdown-toggle:after{
             display: none;
         }
+
+        
     
     </style>
     @yield('css')
@@ -70,10 +76,10 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="#">Atividades Recentes</a>
+                                <a class="dropdown-item" href="{{route('home')}}">Atividades Recentes</a>
                                     <a class="dropdown-item" href="{{route('users.show', Auth::user()->id)}}"> Meu Perfil</a>
+                                    <a class="dropdown-item" href="{{route('users.edit', Auth::user()->id)}}">Configurações da Conta</a>
                                     <a class="dropdown-item" href="#">Check in</a>
-
 
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                         onclick="event.preventDefault();document.getElementById('logout-form').submit();">
