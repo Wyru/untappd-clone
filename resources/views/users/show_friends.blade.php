@@ -94,7 +94,6 @@
                             <div class="card-body">
                             <?php $cont = 0; ?>
                                 @foreach ($requests as $user)
-                    
                                 <div class="card">
                                     <div class="card-body">
                                         <div class="row px-3 mb-3">

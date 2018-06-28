@@ -3,6 +3,7 @@
 namespace App;
 
 use App\HasFriend;
+use App\CheckIn;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -30,18 +31,33 @@ class User extends Authenticatable
     ];
 
     public function count_friends(){
-        $query = HasFriend::where(
-            'user_sender',$this->id
-        )->orWhere(
-            'user_receiver',$this->id
-        )->where('status', '=', true)
+        $query = HasFriend::where(function($queryy){
+            $queryy->where('user_sender',$this->id)->orWhere(
+                'user_receiver',$this->id
+            );
+        })->where('status', '=', true)
         ->count();
-
-
+        
         return $query;
-
+        
     }
+    
+    public function count_total(){
+        
+        $query = CheckIn::where('user_id', '=', $this->id)->count();
+        return $query;
+        
+    }
+    
+    public function count_unique(){
+        
+        $query = CheckIn::where('user_id', '=', $this->id)
+        ->selectRaw('count(DISTINCT beer_id)')->get();
 
+        return $query[0]->count;
+        
+    }
+    
     public function is_friend($id){
 
         $query = HasFriend::where([

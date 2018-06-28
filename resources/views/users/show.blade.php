@@ -58,8 +58,8 @@
                 </div>
                 <div class="row">
                     <div class="col-md-12 d-flex">
-                        <a href="" class="status"><span class="num">0</span> total</a>
-                        <a href="" class="status"><span class="num">0</span> únicas</a>
+                        <a href="" class="status"><span class="num">{{$user->count_total()}}</span> total</a>
+                        <a href="" class="status"><span class="num">{{$user->count_unique()}}</span> únicas</a>
                         <a href="" class="status"><span class="num">0</span> insígnias</a>
                         <a href="{{route('users.friends', $user->id)}}" class="status"><span class="num">{{$user->count_friends()}}</span> amigos</a>
                     </div>
