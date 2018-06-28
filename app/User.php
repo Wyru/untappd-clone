@@ -95,6 +95,9 @@ class User extends Authenticatable
     }
 
     public function friends(){
+        $friends = HasFriend::where('user_sender', '=', $this->id)
+            ->orWhere('user_receiver', '=', $this->id)
+            ->get();
 
         $user_ids = array();
 

@@ -54,7 +54,6 @@
                         {{$beer->get_grade()}} 
                     </div>
                         <div class="col text-center styled-border-left styled-border-bottom p-2" >adicionada {{\Carbon\Carbon::parse($beer->created_at)->format('d/m/Y')}} </div>
-
                     </div>
                 </div>
                 
@@ -73,7 +72,7 @@
                     <div class="check_in">
                         <div class="row">
                             <div class="col-md-1">
-                                <img class="img-fluid rounded-circle" src="{{Auth::user()->get_photo()}}">
+                                <img class="img-fluid rounded-circle" src="{{$checkIn->user->get_photo()}}">
                             </div>
 
                             <div class="col-md-10" style="font-size:20px;">

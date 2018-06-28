@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\CheckIn;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -23,6 +25,12 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $friends_ids = Auth::user()->friends()->pluck('id');
+
+        $checkIns = CheckIn::whereIn('user_id', array_merge($friends_ids->toArray(),[Auth::user()->id]))
+                                ->orderBy('created_at', 'DESC')
+                                ->paginate(15);
+
+        return view('home', compact('checkIns'));
     }
 }

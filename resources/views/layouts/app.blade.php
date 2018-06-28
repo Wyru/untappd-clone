@@ -99,12 +99,14 @@
                                 </div>
                             </li>
                             <li>
-                                <div class="input-group">
-                                    <input type="text" class="search" placeholder="Ache uma cerveja, bar ou cervejaria" aria-label="Recipient's username" aria-describedby="basic-addon2">
-                                    <div class="input-group-append search-icon">
-                                        <span class="input-group-text" id="basic-addon2"><i class="fas fa-search"></i></span>
+                                <form method="GET" action="{{route('search')}}">
+                                    <div class="input-group">
+                                        <input type="text" name="text" class="search" placeholder="Ache uma cerveja, bar ou cervejaria" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                                        <div class="input-group-append search-icon">
+                                            <span class="input-group-text" id="basic-addon2"><i class="fas fa-search"></i></span>
+                                        </div>
                                     </div>
-                                </div>
+                                </form>
                             </li>
                     </ul>
                 </div>

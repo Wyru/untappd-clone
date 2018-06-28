@@ -20,6 +20,7 @@ Route::get('/', function () {
 });
 
 Auth::routes();
+Route::get('search/', 'SearchController@search')->name('search');
 //Friends
 Route::get('/users/{id}/friends', 'UserController@list_friends')->name('users.friends');
 Route::post('/users/accept_friend_request', 'UserController@accept_friend_request')->name('users.accept_friend_request');

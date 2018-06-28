@@ -80,7 +80,7 @@
                     <div class="check_in">
                         <div class="row">
                             <div class="col-md-1">
-                                <img class="img-fluid rounded-circle" src="{{Auth::user()->get_photo()}}">
+                                <img class="img-fluid rounded-circle" src="{{$checkIn->user->get_photo()}}">
                             </div>
 
                             <div class="col-md-10" style="font-size:20px;">
@@ -145,13 +145,30 @@
         </div>
 
         <div class="col-md-4">
-            <div class="card">
-                <div class="card-header">Alguma coisa</div>
+            <div class="card mb-4">
+                <div class="card-header">Amigos</div>
 
                 <div class="card-body">
                     aaaa
                 </div>
             </div>
+
+            <div class="card mb-4">
+                <div class="card-header">Cervejas</div>
+
+                <div class="card-body">
+                    aaaa
+                </div>
+            </div>
+
+            <div class="card mb-4">
+                <div class="card-header">Insignias</div>
+
+                <div class="card-body">
+                    aaaa
+                </div>
+            </div>
+
         </div>
     </div>
 

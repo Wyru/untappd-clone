@@ -56,7 +56,6 @@
                         <div class="col-md-4 text-center styled-border-left styled-border-bottom p-2" >{{$brewery->beers->count()}} cervejas </div>
                     </div>
                 </div>
-                
             </div>
         </div>   
     </div>
@@ -71,7 +70,7 @@
                     <div class="check_in">
                         <div class="row">
                             <div class="col-md-1">
-                                <img class="img-fluid rounded-circle" src="{{Auth::user()->get_photo()}}">
+                                <img class="img-fluid rounded-circle" src="{{$checkIn->user->get_photo()}}">
                             </div>
 
                             <div class="col-md-10" style="font-size:20px;">
