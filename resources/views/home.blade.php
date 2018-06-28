@@ -140,7 +140,7 @@
                                 </div></a>
                                 <br>
                                 <a class="side-user-status-link" href="#"><div class="side-user-info-grey" style="border-right: 1px solid rgba(0,0,0,.3)">
-                                    <span class="num">0</span><br>
+                                    <span class="num">{{Auth::user()->count()}}</span><br>
                                     Insignias 
                                 </div></a>
                                 <a class="side-user-status-link" href="{{route('users.friends', Auth::user()->id)}}"><div class="side-user-info-grey">

@@ -54,9 +54,9 @@ class BeerController extends Controller
                 'logo' => $input['brewery_logo'],
                 'location' => $input['brewery_location'],
                 'type' => $input['brewery_type'],
-                'country' => $input['country_location'],
+                'country' => $input['brewery_country'],
             ]);
-            
+            $input['brewery_id'] = $brewery->id;
         }
         $input['photo'] = '';
         $beer = Beer::create($input);
@@ -66,7 +66,7 @@ class BeerController extends Controller
 
         $beer->save();
         DB::commit();
-        return redirect()->route('home');
+        return redirect()->route('check_in.create');
     }
 
     /**

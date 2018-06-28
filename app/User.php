@@ -115,4 +115,14 @@ class User extends Authenticatable
         return User::whereIn('id', $user_ids)->get();
     }
 
+
+    public function badges(){
+        return $this->hasMany(\App\HasBadge::class);
+    }
+
+    public function beers(){
+        $beer_ids = $this->checkIns()->select('beer_id')->groupBy('beer_id')->get()->pluck('beer_id');
+        return Beer::whereIn('id', $beer_ids)->get();
+        
+    }
 }

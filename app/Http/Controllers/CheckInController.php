@@ -48,58 +48,73 @@ class CheckInController extends Controller
             $check_in->save();
         }
 
-        /////////////////////////////////////////////////////////////
-        /////////TA COMENTADO PQ TEM Q CRIAR OS BADGES NO BANCO//////
-        /////////////////////////////////////////////////////////////
 
-        // $count_beers = CheckIn::where('beer_id', '=', $request->beer_id)->where('user_id', '=', $request->user_id)->count();
+        $count_beers = CheckIn::where('beer_id', '=', $request->beer_id)->where('user_id', '=', $request->user_id)->count();
         
-        // if($count_beers == 1){
-        //     HasBadge::Create(
-        //         ['user_id' => $user->id],
-        //         ['badge_id' => 7],
-        //         ['check_in_id' => $id]
-        // );
-        // }
-        // if($count_beers == 3){
-        //     HasBadge::Create(
-        //         ['user_id' => $user->id],
-        //         ['badge_id' => 9],
-        //         ['check_in_id' => $id]
-        // );
-        // }
+        //ufa hoje é sexta
+        if(Carbon::parse($check_in->created_at)->isFriday()){
+            HasBadge::Create(
+                ['user_id' => $user->id,
+                'badge_id' => 3,
+                'check_in_id' => $check_in->id]
+            );
+        }
         
-        // if($user->count_total() == 1){
-        //     HasBadge::Create(
-        //         ['user_id' => $user->id],
-        //         ['badge_id' => 1],
-        //         ['check_in_id' => $id]
-        // );
-        // }
-        // elseif($user->count_total() == 25 ){
-        //     HasBadge::Create(
-        //         ['user_id' => $user->id],
-        //         ['badge_id' => 4],
-        //         ['check_in_id' => $id]
-        // );
-        // }
-        // elseif($user->count_total() == 50 ){
-        //     HasBadge::Create(
-        //         ['user_id' => $user->id],
-        //         ['badge_id' => 5],
-        //         ['check_in_id' => $id]
-        // );
-        // }
-        // elseif($user->count_total() == 100 ){
-        //     HasBadge::Create(
-        //         ['user_id' => $user->id],
-        //         ['badge_id' => 6],
-        //         ['check_in_id' => $id]
-        // );
-        // }
-        
+        //happy our
+        if(Carbon::parse($check_in->created_at)->gte(Carbon::now()->hour(18)->minute(0)->second(0)) && Carbon::parse($check_in->created_at)->lte(Carbon::now()->hour(22)->minute(0)->second(0))){
+            HasBadge::Create(
+                ['user_id' => $user->id,
+                'badge_id' => 2,
+                'check_in_id' => $check_in->id]
+            );
+        }
 
-        return redirect(route('check_in.show', $check_in->id));
+        if($count_beers == 1){
+            HasBadge::Create(
+                ['user_id' => $user->id,
+                'badge_id' => 7,
+                'check_in_id' => $check_in->id]
+            );
+        }
+
+        if($count_beers == 3){
+            HasBadge::Create(
+                ['user_id' => $user->id,
+                'badge_id' => 9,
+                'check_in_id' => $check_in->id]
+            );
+        }
+        
+        if($user->count_total() == 1){
+            HasBadge::Create(
+                ['user_id' => $user->id,
+                'badge_id' => 1,
+                'check_in_id' => $check_in->id]
+            );
+        }
+        elseif($user->count_total() == 25 ){
+            HasBadge::Create(
+                ['user_id' => $user->id,
+                'badge_id' => 4,
+                'check_in_id' => $check_in->id]
+            );
+        }
+        elseif($user->count_total() == 50 ){
+            HasBadge::Create(
+                ['user_id' => $user->id,
+                'badge_id' => 5,
+                'check_in_id' => $check_in->id]
+            );
+        }
+        elseif($user->count_total() == 100 ){
+            HasBadge::Create(
+                ['user_id' => $user->id,
+                'badge_id' => 6,
+                'check_in_id' => $check_in->id]
+            );
+        }
+
+        return redirect(route('home'));
 
     }
     

@@ -60,7 +60,7 @@
                     <div class="col-md-12 d-flex">
                         <a href="" class="status"><span class="num">{{$user->count_total()}}</span> total</a>
                         <a href="" class="status"><span class="num">{{$user->count_unique()}}</span> únicas</a>
-                        <a href="" class="status"><span class="num">0</span> insígnias</a>
+                        <a href="" class="status"><span class="num">{{$user->badges->count()}}</span> insígnias</a>
                         <a href="{{route('users.friends', $user->id)}}" class="status"><span class="num">{{$user->count_friends()}}</span> amigos</a>
                     </div>
                     
@@ -149,7 +149,20 @@
                 <div class="card-header">Amigos</div>
 
                 <div class="card-body">
-                    aaaa
+                    <div class="row">
+                        @foreach ($user->friends() as $friend)
+                            <div class="col-md-3">
+                                <a class="text-center" href="{{route('users.show', $friend->id)}}">
+                                    <img class="img-fluid rounded-circle" src="{{$friend->get_photo()}}"><br>
+                                    <div class="col-md-12 text-center" style="padding: 0">
+                                        {{$friend->first_name}}
+                                    </div>
+                                </a>
+
+                            </div>
+                        @endforeach
+                    </div>
+                    
                 </div>
             </div>
 
@@ -157,7 +170,18 @@
                 <div class="card-header">Cervejas</div>
 
                 <div class="card-body">
-                    aaaa
+                    <div class="row">
+                        @foreach ($user->beers() as $beer)
+                            <div class="col-md-4">
+                                <a href="{{route('beers.show', $beer->id)}}">
+                                    <img class="img-fluid" src="{{route('file', $beer->photo)}}"><br>
+                                    <div class="col-md-12 text-center" style="padding: 0">
+                                            {{$beer->name}}
+                                    </div>
+                                </a>
+                            </div>
+                        @endforeach
+                    </div>
                 </div>
             </div>
 
@@ -165,7 +189,14 @@
                 <div class="card-header">Insignias</div>
 
                 <div class="card-body">
-                    aaaa
+                    <div class="row">
+                        @foreach ($user->badges as $has_badge)
+                            <div class="col-md-4">
+                                <img class="img-fluid rounded-circle" src="{{$has_badge->badge->get_image()}}"><br>
+                                {{$has_badge->badge->description}}
+                            </div>
+                        @endforeach
+                    </div>
                 </div>
             </div>
 
