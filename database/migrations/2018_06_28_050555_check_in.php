@@ -15,8 +15,8 @@ class CheckIn extends Migration
     {
         Schema::create('check_ins', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id');
-            $table->integer('beer_id');
+            $table->unsignedInteger('user_id');
+            $table->unsignedInteger('beer_id');
             $table->integer('grade');
             $table->timestamps();
 

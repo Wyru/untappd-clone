@@ -15,8 +15,8 @@ class Comments extends Migration
     {
         Schema::create('comments', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id');
-            $table->integer('check_in_id');
+            $table->unsignedInteger('user_id');
+            $table->unsignedInteger('check_in_id');
             $table->string('description');
 
             $table->timestamps();

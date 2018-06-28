@@ -42,52 +42,67 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-12">
+        <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Check-in</div>
-
+                <div class="card-header">Fazer Check-in</div>
                 <div class="card-body">
-                    <div class="row">
-                        <div class="offset-2 col-md-8 menu-edit-title">
-                            Configurações Perfil 
-                        </div>
-                    </div>
-                    
-
-                    <form action="{{route('check_in.store')}}" method="POST" class="mb-5">
+                    <form action="{{route('check_in.store')}}" enctype="multipart/form-data" method="POST" class="form-group">
                         @csrf
                         <input type="hidden" name="user_id" value="{{Auth::user()->id}}">
-                        <div class="form-group row align-items-center">
+                        <div class="row mb-3 ">
+                            <h2 class="text-center col-md-12">Que cerveja você está tomando?</h2>
+                        </div>
+                        <div class="form-group row justify-content-center">
                     
-                            <div class="offset-2">
-                                <h1><label class="align-middle" >Que cerveja você está tomando?</label></h1>
+                            <div class="col-md-3 text-right">
+                                <label class="align-middle" >Nome da Cerveja</label>
                             </div>
                             
-                        </div>                        
-                            <div class="row">
-                                <div class="offset-2 col-md-2">
-                                    <select name="beer_id">
-                                        @foreach ($beers as $beer)
-                                            <option value="{{$beer->id}}">{{$beer->name}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="col-md-2">
-                                    NOTA:
-                                    <select name="grade">
-                                        @for ($i = 0; $i <= 5; $i++)
-                                           <option value="{{$i}}">{{$i}}</option>
-                                        @endfor
-                                    </select>
-                                </div>                                    
-                                <div class="col-md-2">
-                                    <a href="#">Cadastrar nova cerveja</a>
-                                </div>
+                            <div class="col-md-7">
+                                <select name="beer_id" class="form-control">
+                                    @foreach ($beers as $beer)
+                                        <option value="{{$beer->id}}">{{$beer->name}}</option>
+                                    @endforeach
+                                </select>
                             </div>
-                            <br>    
-                            <p class=" text-center">
-                                <button class="btn btn-secondary" type="submit">Fazer Check-in</button>
-                            </p>
+                        </div>
+                        <div class="form-group row justify-content-center">
+                    
+                            <div class="col-md-3 text-right">
+                                <label class="align-middle" >Avaliação</label>
+                            </div>
+                            
+                            <div class="col-md-7">
+                                <select name="grade" class="form-control">
+                                    @for ($i = 0; $i <= 5; $i++)
+                                        <option value="{{$i}}">{{$i}}</option>
+                                    @endfor
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row justify-content-center">
+                    
+                            <div class="col-md-3 text-right">
+                                <label class="align-middle" >Foto do momento</label>
+                            </div>
+                            
+                            <div class="col-md-7">
+                                <input placeholder="" id="photo" type="file" class="form-control{{ $errors->has('photo') ? ' is-invalid' : '' }}" name="photo">
+                            </div>
+
+                        </div>                       
+                        <div class="row justify-content-end mb-4">                                   
+                            <div class="col-md-6">
+                                <a href="{{route('beers.create')}}">Não encontrou a cerveja que procurava?</a>
+                            </div>
+                        </div>
+                        <div class="form-group row justify-content-center">
+                            <div class="col-md-6">
+                                <button type="submit" class="btn btn-block  button-yellow">
+                                    Casdastrar Cerveja
+                                </button>
+                            </div>
+                        </div>
                     </form>
                     
                 </div>

@@ -15,9 +15,9 @@ class HasBadge extends Migration
     {
         Schema::create('has_badge', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id');
-            $table->integer('badge_id');
-            $table->integer('check_in_id');
+            $table->unsignedInteger('user_id');
+            $table->unsignedInteger('badge_id');
+            $table->unsignedInteger('check_in_id');
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');

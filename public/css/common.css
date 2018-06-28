@@ -16,3 +16,12 @@
     font-weight: bolder;
     font-size: 20px;
 }
+
+a{
+    color: #c60;
+}
+
+a:hover{
+    color: #f93;
+    text-decoration: none;
+}

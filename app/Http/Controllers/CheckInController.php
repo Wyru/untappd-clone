@@ -36,12 +36,18 @@ class CheckInController extends Controller
         $user = User::find($request->user_id);
 
         
-        $id =  CheckIn::create([
+        $check_in =  CheckIn::create([
             'user_id' => $request->user_id,
             'beer_id' => $request->beer_id,
             'grade' => $request->grade
-            ])->id;
+        ]);
         
+        if($request->file('photo')){
+            $file_path = 'beer/photo'; 
+            $check_in->photo = $check_in->uploadFile($request->file('photo'), $file_path); 
+            $check_in->save();
+        }
+
         /////////////////////////////////////////////////////////////
         /////////TA COMENTADO PQ TEM Q CRIAR OS BADGES NO BANCO//////
         /////////////////////////////////////////////////////////////
@@ -93,24 +99,14 @@ class CheckInController extends Controller
         // }
         
 
-        return redirect(route('check_in.show', $id));
+        return redirect(route('check_in.show', $check_in->id));
 
     }
     
     public function show($id)
     {
-        
-        $check = CheckIn::find($id);
-
-        $user  = User::find($check->user_id);
-
-        $beer = Beer::find($check->beer_id);
-
-        $brewery = Brewery::find($beer->brewery_id);
-
-
-        return view('/check_ins/show', compact(['check'], ['user'], ['beer'], ['brewery']));
-
+        $checkIn = CheckIn::find($id);
+        return view('check_ins.show', compact('checkIn'));
     }
 
     public function showAllHome($id){
@@ -125,7 +121,7 @@ class CheckInController extends Controller
                 ->select('*','users.id as user_id', 'brewery.name as brewery_name','beers.name as beer_name')
                 ->get();
 
-               // dd($query);
+            // dd($query);
                 
                 return view('feed', compact(['query']));
 
