@@ -31,6 +31,10 @@ Route::post('/users/{id}/update-password', 'UserController@updatePassword')->nam
 Route::get('/home', 'HomeController@index')->name('home');
 
 
+//Check in
+Route::get('/check_in/create', 'CheckInController@create')->name('check_in.create');
+Route::post('/check_in/store', 'CheckInController@store')->name('check_in.store');
+
 
 //Friends
 Route::get('/users/{id}/friends', 'UserController@list_friends')->name('users.friends');

@@ -37,9 +37,8 @@ class User extends Authenticatable
         )->where('status', '=', true)
         ->count();
 
-
         return $query;
-
+        
     }
 
     public function is_friend($id){
