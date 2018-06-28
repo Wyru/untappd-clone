@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use App\Http\Requests\UpdateUserRequest;
+use App\Http\Requests\UpdateUserPasswordRequest;
 
 class UserController extends Controller
 {
@@ -59,7 +61,8 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user = User::find($id);
+        return view('users.edit', compact('user'));
     }
 
     /**
@@ -69,9 +72,27 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateUserRequest $request, $id)
     {
-        //
+        $user = User::find($id);
+
+
+        $user->fill($request->all());
+        $user->save();
+
+
+        return redirect()->route('users.show',$user->id);
+    }
+
+    public function updatePassword(UpdateUserPasswordRequest $request){
+
+        if(isset($request->password)){
+            if(Hash::check($request->current_password, $user->password)){
+                $user->password = bcrypt($request->password);
+            }
+        }
+        
+        return redirect()->route('users.show',$user->id);
     }
 
     /**

@@ -21,16 +21,6 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
     <style>
-        .button-yellow {
-            color: #fff;
-            background-color: #D8AD00;
-        }
-
-        .button-yellow:hover {
-            color: #fff;
-            background-color: #f4b800;
-        }
-
         .title{
             font-size: 30px;
             font-weight: bolder;
@@ -158,9 +148,9 @@
 
                                                 <div class="col-md-6">
                                                     <select id="gender" class="form-control{{ $errors->has('gender') ? ' is-invalid' : '' }}" name="gender" required>
-                                                        <option>Masculino</option>
-                                                        <option>Feminino</option>
-                                                        <option>Não quero dizer</option>
+                                                        <option value="m">Masculino</option>
+                                                        <option value="f">Feminino</option>
+                                                        <option value="n">Não quero dizer</option>
 
                                                     </select>
                                                     @if ($errors->has('gender'))
