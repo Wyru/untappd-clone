@@ -21,10 +21,16 @@ Route::get('/', function () {
 
 Auth::routes();
 
+Route::resource('breweries', 'BreweryController',  ['except' => ['update']]);
+Route::post('/breweries/{id}/', 'BreweryController@update')->name('breweries.update');
+
 Route::resource('users', 'UserController',  ['except' => ['update']]);
 Route::post('/users/{id}/', 'UserController@update')->name('users.update');
+
 Route::post('/users/{id}/update-password', 'UserController@updatePassword')->name('users.update.pass');
 Route::get('/home', 'HomeController@index')->name('home');
+
+
 
 //Friends
 Route::get('/users/{id}/friends', 'UserController@list_friends')->name('users.friends');
@@ -36,4 +42,6 @@ Route::post('/users/send/friend_request', 'UserController@friend_request')->name
 Route::post('/users/accept_friend_request', 'UserController@accept_friend_request')->name('users.accept_friend_request');
 Route::post('/users/decline_friend_request', 'UserController@decline_friend_request')->name('users.decline_friend_request');
 
-
+Route::get('/{folder?}/{filename?}', ['as' => 'file', 'uses' => function($folder, $filename) {
+    return response()->file( storage_path() . '/app/' . $folder. '/' . $filename);  
+}]);
